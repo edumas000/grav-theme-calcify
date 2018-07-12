@@ -1,0 +1,20 @@
+name: Calcify
+version: 0.1.0
+description: "Calcify Theme"
+author:
+  name: Eric Dumas
+  email: eric@calcify.com
+  url: http://www.calcify.com
+keywords: calcify, theme, core, modern, fast, responsive, html5, css3
+license: MIT
+
+title: 
+'@extends': default
+
+
+form:
+  fields:
+    content:
+    type: section
+    title: 'Hero Types: (Slider, Video, Image)'
+    underline: true

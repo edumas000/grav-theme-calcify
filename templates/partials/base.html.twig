@@ -1,0 +1,93 @@
+{% set compress = '.css' %}
+{% set var_grav = grav.config.site.title %}
+{% set body_classes = body_class(['header-fixed', 'header-animated', 'header-dark', 'header-transparent', 'sticky-footer']) %}
+{% set number = 5 %}
+
+<!DOCTYPE html>
+<html lang="{{ grav.language.getLanguage ?: 'en' }}">
+
+<head>
+    {% block stylesheets %}
+        {% do assets.addDirCss('theme://css') %}
+        {# {% do assets.addCss('theme://css/custom.css') %}
+        {% do assets.addCss('theme://css/bootstrap.min.css') %}
+        {% do assets.addCss('theme://css/scrolling-nav.css') %} #}
+    {% endblock %}
+    {{ assets.css() }}
+
+    {% block stylesheets %}
+        {% do assets.addCss('theme://css/custom.css') %}
+    {% endblock %}
+    {{ assets.css() }}
+
+    {% block javascripts %}
+        {% do assets.addJs('theme://js/jquery.js', {group:'bottom'}) %}
+        {% do assets.addJs('theme://js/bootstrap.bundle.min.js', {group:'bottom'}) %}
+        {% do assets.addJs('theme://js/jquery.easing.min.js', {group:'bottom'}) %}
+        {% do assets.addJs('theme://js/scrolling-nav.js', {group:'bottom'}) %}
+        {# {% do assets.addJs('theme://js/jquery.treemenu.js', {group:'bottom'}) %}
+        {% do assets.addJs('theme://js/site.js', {group:'bottom'}) %} #}
+    {% endblock %}
+    {{ assets.js() }}
+
+
+
+</head>
+
+<body id="page-top">
+
+    {% block header_navigation %}
+        {% include 'partials/navigation.html.twig' %}
+    {% endblock %}
+
+    <header class="bg-primary text-white">
+      <div class="container text-center">
+        <h1>Welcome to Scrolling Nav</h1>
+        <p class="lead">A landing page template freshly redesigned for Bootstrap 4</p>
+      </div>
+    </header>
+    
+
+    <div class="container">
+        
+        <ul>
+            {% for p in pages %}
+                <li>{{ p }}</li>
+            {% endfor %}
+        </ul>
+
+        <h1>New: {{ grav.language.getLanguage ?: 'en' }} {{'stylesheet'~compress}}</h1><br/>
+        <h2>{% for i in 1..5 %} {{ i|join('|') }}, {% endfor %}</h2><br/>
+        <h2>{{ site.title|e('html') }}</h2><br/>
+        <code>**{{ site.title|e('html') }}**</code><br/>
+        <code>**{{ page.url(false, true) }}**</code><br/>
+        {# <a href="{{ home_url }}" class="navbar-brand mr-10">{% include('@images/grav-logo.svg') %}</a><br/> #}
+        <code>{{ (1..5 )|join }}</code><br/>
+        {% set foo = 'bar' %}
+        <code>{{ body_classes }}</code><br/>
+        <code>{{ [1, 2, 3]|join('|') }}</code><br/>
+        <code>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</code><br/>
+        <code>{{ header.title ? header.title|e('html') : ' ' }} | {{ site.title|e('html') }}</code>
+    </div>
+    
+    <div class="container">
+    {% verbatim %}
+        <ul>
+        {% for item in seq %}
+            <li>{{ item }}</li>
+        {% endfor %}
+        </ul>
+    {% endverbatim %}
+    </div>
+    
+    <div class="">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% block bottom %}
+        {{ assets.js('bottom') }}
+    {% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+{% extends 'partials/base.html.twig' %}
+
+{% block hero_area %}
+    {% set hero = page.collection|first %}
+        {{ hero.content }}
+{% endblock %}
